@@ -1,0 +1,16 @@
+<div class="container">
+<h1>Edit</h1>
+
+
+<%@skills.each do |skill|%>
+	<form method="POST" action="/user/edit">
+		Name: <%=skill.name%>
+		Years: <input type="text" name="skill[years]" placeholder="<%=skill.years%>">
+		<input type="hidden" name="skill[id]" value="<%=skill.id%>">
+		<input type="submit" value="update">
+	</form>
+<%end%>
+
+
+
+</div>

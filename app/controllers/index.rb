@@ -44,11 +44,27 @@ get '/users/new' do
   erb :sign_up
 end
 
+get '/user/edit' do 
+  @user = User.find(session[:user_id])
+  @skills = @user.skills.all
+  erb :edit
+end
+
+
+post '/user/edit' do
+  skill = Skill.find(params[:skill][:id])
+  skill.update_attribute(:years, params[:skill][:years])
+  redirect '/'
+end
+
 post '/users' do
   # sign-up
   @user = User.new params[:user]
+  skill = Skill.create params[:skill]
   if @user.save
     # successfully created new account; set up the session and redirect
+    # binding.pry
+    @user.skills << skill
     session[:user_id] = @user.id
     redirect '/'
   else

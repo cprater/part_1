@@ -1,5 +1,29 @@
 <div class="container">
   <h1>User Skills and Levels</h1>
 
-  <%# TODO: display the skills and proficiency levels for each user ... %>
+  <table>
+  	<tr>
+  		<td>Name</td>
+  		<td>Skill</td>
+  		<td>Years</td>
+  		<td>Formal?</td>
+  	</tr>
+	  <%@users.each do |user|%>
+	  	<tr>
+	  		<td><%=user.name%></td>
+	  			<%user.skills.all.each do |skill|%>
+			  		<td><%=skill.name%>(<%=skill.context%>)</td>
+			  		<td><%=skill.years%></td>
+			  		<td><%=skill.formal%></td>
+		  		<%end%>
+
+		  	<%if session[:user_id] == user.id%>
+	  			<td><a href="/user/edit">edit</a></td>
+	  		<%end%>
+	  	</tr>
+
+	  <%end%>
+
+
+	</table>
 </div>
