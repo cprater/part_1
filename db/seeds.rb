@@ -6,14 +6,18 @@ require 'faker'
   User.create :name => Faker::Name.name, :email => Faker::Internet.email, :password => 'password'
 end
 
+@years = (1..4).to_a
+@formal = [true, false]
+
 # create a few technical skills
 computer_skills = %w(Ruby Sinatra Rails JavaScript jQuery HTML CSS)
 computer_skills.each do |skill|
-  Skill.create :name => skill, :context => 'technical'
+	year = @years.sample
+	bool = @formal.sample
+  Skill.create(:name => skill, :context => 'technical', :years => year, :formal => bool)
 end
 
-@years = (1..4).to_a
-@formal = [true, false]
+
 
 # create a few creative skills
 design_skills = %w(Photoshop Illustrator Responsive-Design)
